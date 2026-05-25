@@ -1,12 +1,22 @@
 {
+  "ignore": [
+    ".claude/README.md",
+    "frappe-bench/apps/frappe/**",
+    "frappe-bench/apps/erpnext/**",
+    "frappe-bench/env/**",
+    "frappe-bench/node_modules/**",
+    "frappe-bench/sites/assets/**"
+  ],
   "hooks": {
     "PreToolUse": [
       {
         "matcher": "Write",
-        "hooks": [{
-          "type": "command",
-          "command": ".claude/hooks/pre-write.sh"
-        }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/pre-write.sh"
+          }
+        ]
       }
     ]
   }
