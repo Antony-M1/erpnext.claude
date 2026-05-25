@@ -21,9 +21,9 @@ mv erpnext.claude .claude
 ```
 
 GET START WITH CLAUDE
+
 HAPPY CODING...
 
-**Step 3**
 
 
 # Claude Code — `.claude` Directory Guide for ERPNext
