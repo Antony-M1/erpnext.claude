@@ -1,6 +1,30 @@
 # erpnext.claude
 .claude for ERPNext
 
+# Quick Setup
+
+**Step 1** Clone the repo in respective folder for example
+
+Docker Devcontianer : `workspace/development`
+Normal Development : In side the `frappe-bench`
+
+In genral keep the .claude in the working directory for best practice
+
+```sh
+git clone https://github.com/Antony-M1/erpnext.claude.git
+```
+
+**Step 2** Rename the folder
+If needed do manaual rename also
+```sh
+mv erpnext.claude .claude
+```
+
+GET START WITH CLAUDE
+HAPPY CODING...
+
+**Step 3**
+
 
 # Claude Code — `.claude` Directory Guide for ERPNext
 
