@@ -20,6 +20,14 @@ If needed do manaual rename also
 mv erpnext.claude .claude
 ```
 
+**Step 3** Create `CLAUDE.md` file out of the .claude folder
+
+In this page its self there is a section `CLAUDE.md — Project Memory` copy content from there and past inside the `CLAUDE.md`
+
+```
+touch CLAUDE.md
+```
+
 GET START WITH CLAUDE
 
 HAPPY CODING...
