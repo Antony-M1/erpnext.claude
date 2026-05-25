@@ -3,6 +3,9 @@
     ".claude/README.md",
     "frappe-bench/apps/frappe/**",
     "frappe-bench/apps/erpnext/**",
+    "frappe-bench/apps/hrms/**",
+    "frappe-bench/apps/crm/**",
+    "frappe-bench/apps/payments/**",
     "frappe-bench/env/**",
     "frappe-bench/node_modules/**",
     "frappe-bench/sites/assets/**"
