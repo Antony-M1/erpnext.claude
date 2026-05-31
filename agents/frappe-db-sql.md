@@ -1,3 +1,12 @@
+---
+name: frappe-db-sql
+description: Use this agent when writing Frappe ORM queries, raw SQL
+  for MariaDB via frappe.db.sql(), working with DocType table
+  schemas, child table JOINs, naming conventions, or any
+  Frappe/ERPNext database query task.
+model: claude-sonnet-4-6
+---
+
 # Frappe DB SQL Agent
 
 ## Agent Identity
