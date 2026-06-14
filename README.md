@@ -85,6 +85,15 @@ Auto-loaded every session. Tell Claude your stack, commands, and rules once — 
 ```markdown
 # ERPNext Custom App — CLAUDE.md
 
+Custom App: {custom_app}
+
+# Installed apps
+frappe  15.101.2 version-15
+erpnext 15.99.1  version-15
+hrms    15.58.2  version-15
+crm     1.59.2   main
+{custom_app}     0.0.1    develop
+
 ## Stack
 - Frappe Framework v15 + ERPNext v15
 - Python 3.11, MariaDB 10.6, Redis
