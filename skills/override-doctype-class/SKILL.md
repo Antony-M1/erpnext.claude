@@ -1,4 +1,3 @@
-
 ---
 name: override-doctype-class
 description: >
