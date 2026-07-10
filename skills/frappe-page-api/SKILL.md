@@ -57,7 +57,19 @@ relevant doc link rather than guessing.
 - Avoid comment-based function docstrings/headers. Code should be
   self-explanatory through naming; only add a comment when the "why" isn't
   obvious from the code itself.
-- Always use the deticative html and css files for each page with page name
+- Pages must be **mobile responsive**. Don't assume a wide desktop viewport:
+  use responsive CSS (flex-wrap, `%`/`vw` widths, media queries) instead of
+  fixed pixel widths, avoid layouts that only work in multi-column desktop
+  view, and test that page fields, inner toolbar buttons, and any custom
+  HTML added via `page.main` degrade gracefully on small screens (buttons
+  should wrap or collapse into the Menu dropdown rather than overflow).
+- Use **dedicated HTML and CSS files** for page markup — avoid keeping HTML
+  strings inside the JS file, even for a small block. Name HTML partials
+  `{page_name}_{block_name}.html` and load/append them into the page
+  accordingly (e.g. via `frappe.require` or a template fetch) instead of
+  inlining markup as JS strings. Keep **one CSS file per page**, define
+  custom classes in it, and reference those classes from the HTML rather
+  than writing inline styles or one-off styles in JS.
 
 ---
 
@@ -367,3 +379,15 @@ This writes to `./logs/api.log` and `./sites/<site>/logs/api.log`.
 3. Keep Python-side code (Jinja helpers, `frappe.logger` calls, hooks) in
    plain, idiomatic Frappe Python — the async/await + arrow function rules
    are JS-specific and don't apply to the Python examples.
+4. If the user explicitly says they want a **full page** / **standalone
+   page** / **no existing ERPNext/Desk components** (e.g. "utilize full
+   page", "no ERPNext existing component", "don't want to use the Page
+   API"), do NOT build it with `frappe.ui.make_app_page` / the Page API.
+   Instead build it as a standalone full-viewport page (e.g. a Website/Web
+   Page route, a custom route rendered outside the Desk shell, or a
+   full-page HTML template) so that none of the standard Desk chrome shows
+   up — no top navbar/profile dropdown, no global search bar, no sidebar,
+   no notifications icon, nothing from the default ERPNext/Desk shell.
+   Only the user's own content should render on the page. Confirm this
+   intent with the user if it's ambiguous whether they want a Desk page
+   (with standard chrome) or a fully custom page (with none of it).
