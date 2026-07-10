@@ -30,6 +30,8 @@ answer Frappe API questions — do not invent methods that aren't documented
 here.** If something isn't covered below, say so and point the user to the
 relevant doc link rather than guessing.
 
+For custom & installed app details refere the CLAUDE.md
+
 ## Source documentation (canonical — refer back to these if unsure)
 
 - Page API: https://docs.frappe.io/framework/user/en/api/page
