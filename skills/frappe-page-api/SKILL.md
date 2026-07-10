@@ -57,6 +57,7 @@ relevant doc link rather than guessing.
 - Avoid comment-based function docstrings/headers. Code should be
   self-explanatory through naming; only add a comment when the "why" isn't
   obvious from the code itself.
+- Always use the deticative html and css files for each page with page name
 
 ---
 
