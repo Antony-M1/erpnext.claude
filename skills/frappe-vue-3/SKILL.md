@@ -3,12 +3,13 @@ name: frappe-vue-3
 description: >
   Use this skill whenever working on a Vue 3 single-page app inside a Frappe
   app's `frontend/` directory (the frappe-ui + Vite pattern used by Frappe
-  CRM, Helpdesk, and this app's own `apps/fms/frontend` Marketplace Portal).
+  CRM, Helpdesk, and any custom app's own `apps/{custom_app}/frontend` SPA).
   Trigger it for: writing or editing `.vue` components under `frontend/src`;
   touching `vite.config.js`, `frontend/package.json`, `main.js`, `App.vue`,
   `router.js`, Pinia stores, or composables; anything about the `yarn dev`
-  vs `yarn build` workflow, the Vite dev server port, or the `www/<app>/*`
-  controller + `get_context_for_dev` boot-data pattern; and Chrome/Vue
+  vs `yarn build` workflow, the Vite dev server port, or the
+  `www/{custom_app}/*` controller + `get_context_for_dev` boot-data pattern;
+  and Chrome/Vue
   "Devtools inspection is not available — production mode" warnings on a
   Frappe-hosted Vue app. Also trigger on requests like "add a component to
   the portal", "why isn't Vue devtools working", "wire up a new page/route
@@ -24,11 +25,12 @@ tools:
 
 This skill packages the architecture and conventions for the Vue 3 SPA
 pattern used in Frappe apps built on `frappe-ui` + Vite (the same pattern
-Frappe CRM and Helpdesk use). It's grounded in this repo's own instance:
-`apps/fms/frontend` (the FMS Marketplace Portal). **Only use the information
-in this file to answer questions about this pattern — if something isn't
-covered here, say so and inspect the specific app's `frontend/vite.config.js`
-/ `package.json` / `main.js` rather than guessing.**
+Frappe CRM and Helpdesk use). It applies to any custom app in this bench —
+substitute your app's own name everywhere `{custom_app}` appears below (e.g.
+`apps/{custom_app}/frontend`). **Only use the information in this file to
+answer questions about this pattern — if something isn't covered here, say
+so and inspect the specific app's `frontend/vite.config.js` / `package.json`
+/ `main.js` rather than guessing.**
 
 For custom & installed app details, refer to the project's `CLAUDE.md` first.
 
@@ -43,7 +45,7 @@ For custom & installed app details, refer to the project's `CLAUDE.md` first.
 
 ## 1. Directory layout (frontend/)
 
-A frappe-ui Vue 3 SPA under `apps/<app>/frontend/` follows this shape:
+A frappe-ui Vue 3 SPA under `apps/{custom_app}/frontend/` follows this shape:
 
 | Path | Purpose |
 |---|---|
@@ -63,7 +65,7 @@ Backend side (in the Frappe app, not `frontend/`):
 
 | Path | Purpose |
 |---|---|
-| `<app>/www/<route>/<name>.py` | `no_cache = 1` controller; `get_context(context)` sets `context.boot` — this is what Jinja injects as `window.*` globals for the **built** app |
+| `{custom_app}/www/<route>/<name>.py` | `no_cache = 1` controller; `get_context(context)` sets `context.boot` — this is what Jinja injects as `window.*` globals for the **built** app |
 | same file, `get_context_for_dev()` | A `@frappe.whitelist(allow_guest=True)` twin of the same boot payload, fetched over AJAX **only** by `yarn dev` (raw `index.html` has no Jinja templating there). Must be guarded by `frappe.conf.developer_mode` — never let this run against a production site. |
 
 ---
@@ -74,7 +76,7 @@ Backend side (in the Frappe app, not `frontend/`):
 |---|---|---|
 | Command | `vite` (dev server) | `vite build --base=... && copy-html-entry` |
 | Vite `mode` | `development` (default for `vite` serve) | `production` (default for `vite build`, no `--mode` flag passed) |
-| Served from | Vite's own port (see formula below), proxying API calls to bench | `apps/<app>/public/frontend/*`, copied into `<app>/www/<route>/*.html`, served by bench on the normal site port |
+| Served from | Vite's own port (see formula below), proxying API calls to bench | `apps/{custom_app}/public/frontend/*`, copied into `{custom_app}/www/<route>/*.html`, served by bench on the normal site port |
 | Boot data | Fetched via `get_context_for_dev()` AJAX call, `developer_mode`-gated | Injected server-side by Jinja via `context.boot` |
 | HMR | Yes | No |
 | Vue devtools | **Always available** (dev build) | **Compiled out** by default (`__VUE_PROD_DEVTOOLS__` defaults to `false`) |
@@ -172,8 +174,9 @@ dev-only check) exactly as above.
 
 1. Before changing `vite.config.js`, `main.js`, or anything touching
    `__VUE_PROD_DEVTOOLS__` / boot-data fetching, read the target app's
-   actual files first — don't assume they match this file's `fms` example
-   verbatim; confirm the plugin options, port, and route base in place.
+   actual files first — don't assume they match this file's `{custom_app}`
+   placeholders verbatim; confirm the plugin options, port, and route base
+   actually in place for that app.
 2. Any devtools/debug-enabling change must be gated behind `mode ===
    'development'` (Vite) or `frappe.conf.developer_mode` (Python) — never
    unconditional, and never merged into the same code path the real
